@@ -354,10 +354,12 @@ function App() {
   useEffect(() => {
     async function loadWords() {
       try {
-        const response = await fetch('/tdk-words.json', { cache: 'no-store' });
-        if (!response.ok) {
-          throw new Error('public/tdk-words.json bulunamadı.');
-        }
+        const wordsUrl = `${import.meta.env.BASE_URL}tdk-words.json`;
+const response = await fetch(wordsUrl, { cache: 'no-store' });
+
+if (!response.ok) {
+  throw new Error(`${wordsUrl} bulunamadı.`);
+}
 
         const payload = await response.json();
         const { wordsByLength, meta } = readDictionaryPayload(payload);
