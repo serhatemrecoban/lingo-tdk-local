@@ -127,13 +127,13 @@ def main() -> None:
     parser.add_argument(
         "--ratio",
         type=float,
-        default=0.85,
-        help="Yeni cevap listesinin eski listeye oranı. 0.70 altına düşmemeli. Örn: 0.85",
+        default=0.40,
+        help="Yeni cevap listesinin eski listeye oranı. 0.20 altına düşmemeli. Örn: 0.85",
     )
     args = parser.parse_args()
 
-    if args.ratio < 0.70 or args.ratio > 1.0:
-        raise SystemExit("--ratio 0.70 ile 1.00 arasında olmalı. Örn: --ratio 0.85")
+    if args.ratio < 0.20 or args.ratio > 1.0:
+        raise SystemExit("--ratio 0.20 ile 1.00 arasında olmalı. Örn: --ratio 0.40")
 
     words_by_length = load_words(SOURCE_FILE)
 

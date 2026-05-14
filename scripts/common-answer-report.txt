@@ -1,12 +1,12 @@
-Hedef oran: 80%
+Hedef oran: 40%
 
-4 harf: 1989 -> 1592 kelime (80.0%)
+4 harf: 1989 -> 796 kelime (40.0%)
 Çıkarılan düşük frekanslı örnekler: abat, abis, abli, abra, abus, acve, acyo, acep, acul, acur, adap, adaş, adcı, adıl, afak, afal, afat, afif, afis, agah, agel, aguş, ahar, ahdi, ahiz, ahşa, ajur, akak, akaç, akik, akim, akis, akma, akse, akur, akva, alaz, alil, allı, alık, alıç, amal, amil, amip, amit, amor, amut, anif, anot, anut, anık, anız, apaz, apaş, apel, apre, apse, apış, arak, arlı, aruz, arız, arış, arşe, asap, ases, asri, ateh, atel, atol, atçı, ayal, aylı, ayma, ayol, ayıt, azca, azel, azil, azit
 
-5 harf: 5313 -> 4251 kelime (80.0%)
+5 harf: 5313 -> 2126 kelime (40.0%)
 Çıkarılan düşük frekanslı örnekler: abaşo, abosa, abraş, abuli, acibe, acuze, afazi, afoni, agraf, ahcar, ahfat, ahlaf, ahraz, akait, akaju, akala, akont, akpas, akvam, amudi, anlak, anüri, apotr, abacı, abadi, abalı, abani, abece, ablak, aceze, acube, acıca, adale, adese, adsal, afaki, afili, afişe, afsun, aftos, agami, ahize, ahval, ajite, akdut, akemi, akide, aklan, aklen, aklık, akmaz, akson, akşın, alaza, aleyh, algın, alize, alkil, alkım, allem, allık, almaç, almaş, alnaç, altes, altlı, altık, altız, alyan, alyon, amorf, ampir, anaca, analı, anane, andaç, andık, andız, andıç, anele
 
-6 harf: 5795 -> 4636 kelime (80.0%)
+6 harf: 5795 -> 2318 kelime (40.0%)
 Çıkarılan düşük frekanslı örnekler: adacyo, adenit, aganta, agnosi, agnozi, agrafi, akamet, akaret, akasma, aksona, aksuna, aktüer, alivre, amnezi, anilin, anofel, arkeen, arktik, artroz, asepsi, asetik, atavik, artrit, ateizm, abajur, abaküs, abanma, abanoz, abanış, abasız, abazan, ablacı, aborda, abrama, absent, abstre, abukça, acente, acyocu, acıkma, acıkış, acılık, acımsı, acımık, acınma, acınış, acırak, acırga, acıtma, acıtış, acıyış, adacık, adaklı, adamca, adanma, adanış, adatma, adatış, adavet, adayış, adetçe, adilik, afakan, afişçi, agrega, agucuk, ahacık, aharlı, aheste, ahiren, ahlama, ahuvah, ajanda, ajurlu, akarca, akağaç, akdarı, akitli, akliye, aksata
 
-Toplam: 13097 -> 10479 kelime (80.0%)
+Toplam: 13097 -> 5240 kelime (40.0%)
