@@ -305,7 +305,7 @@ function StartPanel({ loading, dictionaryMeta, totalCount, soundEnabled, onStart
 
       {dictionaryMeta ? (
         <p className="pool-line">
-          TDK havuzu hazır: {totalCount} kelime · {dictionaryMeta.counts[4]} adet 4 harfli · {dictionaryMeta.counts[5]} adet 5 harfli · {dictionaryMeta.counts[6]} adet 6 harfli
+          Cevap havuzu hazır: {totalCount} kelime · {dictionaryMeta.counts[4]} adet 4 harfli · {dictionaryMeta.counts[5]} adet 5 harfli · {dictionaryMeta.counts[6]} adet 6 harfli
         </p>
       ) : null}
 
@@ -329,6 +329,7 @@ function RevealCard({ reveal, onSkip }) {
 
 function App() {
   const [dictionary, setDictionary] = useState(null);
+  const [answerDictionary, setAnswerDictionary] = useState(null);
   const [dictionaryMeta, setDictionaryMeta] = useState(null);
   const [setupError, setSetupError] = useState('');
   const [screen, setScreen] = useState('loading');
@@ -352,28 +353,45 @@ function App() {
   }, [soundEnabled]);
 
   useEffect(() => {
+    async function fetchWordFile(filename) {
+      const url = `${import.meta.env.BASE_URL}${filename}`;
+      const response = await fetch(url, { cache: 'no-store' });
+
+      if (!response.ok) {
+        throw new Error(`${filename} bulunamadı. URL: ${url}`);
+      }
+
+      return response.json();
+    }
+
     async function loadWords() {
       try {
-        const wordsUrl = `${import.meta.env.BASE_URL}tdk-words.json`;
-const response = await fetch(wordsUrl, { cache: 'no-store' });
+        const [tdkPayload, commonPayload] = await Promise.all([
+          fetchWordFile('tdk-words.json'),
+          fetchWordFile('tdk-common-answers.json')
+        ]);
 
-if (!response.ok) {
-  throw new Error(`${wordsUrl} bulunamadı.`);
-}
+        const tdk = readDictionaryPayload(tdkPayload);
+        const common = readDictionaryPayload(commonPayload);
 
-        const payload = await response.json();
-        const { wordsByLength, meta } = readDictionaryPayload(payload);
-        setDictionary(wordsByLength);
-        setDictionaryMeta(meta);
+        setDictionary(tdk.wordsByLength);
+        setAnswerDictionary(common.wordsByLength);
+        setDictionaryMeta({
+          ...common.meta,
+          source: 'public/tdk-common-answers.json',
+          validationCounts: tdk.meta.counts
+        });
+
         setSetupError('');
         setScreen('ready');
-        setMessage('Kelime havuzu hazır. Oyuna başlamak için butona bas.');
+        setMessage('Kolaylaştırılmış cevap havuzu hazır. Oyuna başlamak için butona bas.');
       } catch (error) {
         setDictionary(null);
+        setAnswerDictionary(null);
         setDictionaryMeta(null);
         setRoundWords([]);
         setSetupError(error instanceof Error ? error.message : String(error));
-        setMessage('TDK listesi yüklenemedi.');
+        setMessage('Kelime listesi yüklenemedi.');
         setScreen('setup');
       }
     }
@@ -448,13 +466,13 @@ if (!response.ok) {
   }, [advanceAfterReveal, clearTransitionTimeout]);
 
   const startGame = useCallback(() => {
-    if (!dictionary) return;
+    if (!dictionary || !answerDictionary) return;
 
     if (transitionTimeoutRef.current) {
       window.clearTimeout(transitionTimeoutRef.current);
     }
 
-    const picked = pickRoundWords(dictionary);
+    const picked = pickRoundWords(answerDictionary);
     setRoundWords(picked);
     setRoundResults(Array(ROUND_PLAN.length).fill(null));
     setRoundIndex(0);
@@ -469,7 +487,7 @@ if (!response.ok) {
     unlockAudio();
     playSound('start');
     window.setTimeout(() => inputRef.current?.focus(), 0);
-  }, [dictionary, playSound, unlockAudio]);
+  }, [dictionary, answerDictionary, playSound, unlockAudio]);
 
   const submitGuess = useCallback((rawGuess, expired = false) => {
     if (!answer || screen !== 'playing' || setupError || isTransitioning) return;
